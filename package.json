@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "dev": "./scripts/dev"
+  },
+  "dependencies": {
+    "daisyui": "^5.0.0-beta.8",
+    "tailwindcss": "^4.0.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.8"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher"
+    ]
+  }
+}

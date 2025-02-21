@@ -1,0 +1,36 @@
+#!/bin/bash
+
+SESSION_NAME="talarai-dev"
+
+# Kill the session if it already exists
+tmux has-session -t $SESSION_NAME 2>/dev/null
+if [ $? -eq 0 ]; then
+    echo "Session $SESSION_NAME already exists. Attaching..."
+    tmux attach -t $SESSION_NAME
+    exit 0
+fi
+
+# Start a new tmux session and create a small top pane
+tmux new-session -d -s $SESSION_NAME -n main
+
+# Enable mouse mode directly within the script
+tmux set -g mouse on
+
+# Create a horizontal split for the top pane
+tmux split-window -v -t $SESSION_NAME
+tmux resize-pane -t $SESSION_NAME:0.0 -y 5  # Resize the top pane to be small
+
+# Split the bottom pane into two vertical sections
+tmux split-window -h -t $SESSION_NAME:0.1
+
+# Pane 0 (small top pane) - Waits for user input to quit
+tmux send-keys -t $SESSION_NAME:0.0 "echo 'Press ENTER to quit everything...' && read && tmux kill-session -t $SESSION_NAME" C-m
+
+# Pane 1 - Tailwind CLI
+tmux send-keys -t $SESSION_NAME:0.1 "npx @tailwindcss/cli -i ./input.css -o ./assets/tailwind.css --watch" C-m
+
+# Pane 2 - dx serve
+tmux send-keys -t $SESSION_NAME:0.2 "dx serve" C-m
+
+# Attach to session
+tmux attach -t $SESSION_NAME
