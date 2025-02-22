@@ -5,7 +5,7 @@ const HEADER_SVG: Asset = asset!("/assets/header.svg");
 #[component]
 pub fn Hero() -> Element {
     rsx! {
-        div { class: "min-h-screen",
+        div {
             img { src: HEADER_SVG, id: "header" }
             div { class: "flex justify-center items-center text-center",
                 a { href: "https://dioxuslabs.com/learn/0.6/", "📚 Learn Dioxus" }
