@@ -1,8 +1,9 @@
+use dioxus::desktop::use_global_shortcut;
 use dioxus::prelude::*;
 use dioxus::{desktop::Config, desktop::WindowCloseBehaviour};
 
 use components::Hero;
-use settings::SettingsButton;
+use settings::{open_settings, SettingsButton};
 
 mod components;
 mod settings;
@@ -24,7 +25,16 @@ fn main() {
 
 #[component]
 fn App() -> Element {
-    // Build cool things ✌️
+
+    #[cfg(target_os = "macos")]
+    let settings_shortcut = "super+,";
+    
+    #[cfg(not(target_os = "macos"))]
+    let settings_shortcut = "ctrl+,";
+
+    _ = use_global_shortcut(settings_shortcut, move || {
+        open_settings();
+    });
 
     rsx! {
         // Global app resources

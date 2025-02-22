@@ -1669,6 +1669,9 @@
   .m-6 {
     margin: calc(var(--spacing) * 6);
   }
+  .m-8 {
+    margin: calc(var(--spacing) * 8);
+  }
   .filter {
     display: flex;
     flex-wrap: wrap;
@@ -1924,6 +1927,9 @@
   .table {
     display: table;
   }
+  .h-7 {
+    height: calc(var(--spacing) * 7);
+  }
   .h-screen {
     height: 100vh;
   }
@@ -1954,6 +1960,21 @@
     background-size: 200% auto;
     background-repeat: no-repeat;
     background-position-x: -50%;
+  }
+  .link {
+    cursor: pointer;
+    text-decoration-line: underline;
+    &:focus {
+      outline-style: none;
+      @media (forced-colors: active) {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+      }
+    }
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
   }
   .resize {
     resize: both;
@@ -2034,6 +2055,10 @@
       }
     }
   }
+  .blur {
+    --tw-blur: blur(8px);
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
@@ -2066,6 +2091,24 @@
   }
   .\[h\:\>RM\#�\12 \4 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\\12 \4 X\12 �А�\!��-��w�\] {
     h: >RM#�X�А�!���4]lX���Ǘ�K������\X�А�!��-��w�;
+  }
+  .\[h\:\>RM\#�\19 \4 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\\19 \4 X\12 �А�\!��-��w�\] {
+    h: >RM#�X�А�!���4]lX���Ǘ�K������\X�А�!��-��w�;
+  }
+  .\[h\:\>RM\#�\1d \4 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\\1d \4 X\12 �А�\!��-��w�\] {
+    h: >RM#�X�А�!���4]lX���Ǘ�K������\X�А�!��-��w�;
+  }
+  .\[h\:\>RM\#�U6X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\U6X\12 �А�\!��-��w�\] {
+    h: >RM#�U6X�А�!���4]lX���Ǘ�K������\U6X�А�!��-��w�;
+  }
+  .\[h\:\>RM\#�i6X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\i6X\12 �А�\!��-��w�\] {
+    h: >RM#�i6X�А�!���4]lX���Ǘ�K������\i6X�А�!��-��w�;
+  }
+  .\[h\:\>RM\#�j6X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\j6X\12 �А�\!��-��w�\] {
+    h: >RM#�j6X�А�!���4]lX���Ǘ�K������\j6X�А�!��-��w�;
+  }
+  .\[h\:\>RM\#��\4 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\�\4 X\12 �А�\!��-��w�\] {
+    h: >RM#��X�А�!���4]lX���Ǘ�K������\�X�А�!��-��w�;
   }
 }
 @layer base {

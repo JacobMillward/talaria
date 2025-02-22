@@ -9,6 +9,8 @@ use dioxus::{
 
 use crate::{generate_config, FAVICON, TAILWIND_CSS};
 
+pub static SETTINGS_WINDOW: GlobalSignal<Weak<DesktopService>> = GlobalSignal::new(|| Weak::<DesktopService>::new());
+
 #[component]
 fn Settings_Window() -> Element {
     rsx! {
@@ -25,23 +27,8 @@ fn Settings_Window() -> Element {
 
 #[component]
 pub fn SettingsButton() -> Element {
-    let mut state = use_signal(|| Weak::<DesktopService>::new());
-
     let onclick = move |_| {
-        let current_window = state.read().upgrade();
-        match current_window {
-            Some(service) => {
-                service.set_focus()
-            },
-            None => {
-                let config = generate_config()
-                    .with_menu(None);
-
-                let dom = VirtualDom::new(Settings_Window);
-                let service = window().new_window(dom, config);
-                *state.write() = service;
-            }
-        }
+        open_settings();
     };
 
     rsx! {
@@ -49,6 +36,25 @@ pub fn SettingsButton() -> Element {
             onclick,
             class: "btn btn-neutral",
             "Settings"
+        }
+    }
+}
+
+pub fn open_settings() {
+    let state = SETTINGS_WINDOW.read().upgrade();
+
+    match state {
+        Some(service) => {
+            service.set_focus();
+        },
+        None => {
+            let config = generate_config()
+                .with_menu(None);
+
+            let dom = VirtualDom::new(Settings_Window);
+            let service = window().new_window(dom, config);
+            
+            *SETTINGS_WINDOW.write() = service;
         }
     }
 }
