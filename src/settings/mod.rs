@@ -1,15 +1,21 @@
 use std::rc::{Rc, Weak};
 use dioxus::{desktop::{use_global_shortcut, window, DesktopService}, prelude::*};
-use global_shortcuts::{compose_global_shortcut, SETTINGS_KEY};
-use models::{Settings, SettingsUpdate};
-use settings_view::SettingsUpdateCallback;
 use crate::generate_config;
 
+// Private modules
 mod settings_view;
 mod theme_picker;
 
+// Public modules
 pub mod global_shortcuts;
 pub mod models;
+
+// Re-exports
+pub use models::{Settings, SettingsUpdate, Theme};
+pub use settings_view::SettingsUpdateCallback;
+
+use global_shortcuts::{compose_global_shortcut, SETTINGS_KEY};
+
 
 static SETTINGS_WINDOW: GlobalSignal<Weak<DesktopService>> =
     GlobalSignal::new(|| Weak::<DesktopService>::new());

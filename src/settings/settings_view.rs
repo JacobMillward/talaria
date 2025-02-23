@@ -1,9 +1,9 @@
 use std::rc::Rc;
 
 use dioxus::prelude::*;
-use crate::{components::ThemeChanger, hooks::use_extracted_state, settings::models::SettingsUpdate, FAVICON, TAILWIND_CSS};
+use crate::{components::ThemeChanger, hooks::use_extracted_state, settings::theme_picker::ThemePicker, FAVICON, TAILWIND_CSS};
 
-use super::{models::Settings, theme_picker::ThemePicker};
+use super::models::{Settings, SettingsUpdate};
 
 pub type SettingsUpdateCallback = Rc<dyn Fn(SettingsUpdate)>;
 
