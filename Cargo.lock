@@ -3990,6 +3990,7 @@ name = "talarai"
 version = "0.1.0"
 dependencies = [
  "dioxus",
+ "futures-util",
 ]
 
 [[package]]

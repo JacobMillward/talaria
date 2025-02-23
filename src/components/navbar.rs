@@ -61,7 +61,6 @@ pub fn NavBar() -> Element {
             div { class: "navbar-end",
                 button {
                     class: "btn",
-                    onclick: |_| open_settings(),
                     "Settings"
                 }
             }
