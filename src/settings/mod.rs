@@ -6,9 +6,9 @@ mod settings_view;
 mod theme_picker;
 
 pub mod global_shortcuts;
-pub mod settings;
+pub mod models;
 
-pub use settings::Theme;
+pub use models::Theme;
 
 // Type alias for our theme change callback
 type ThemeCallback = Rc<dyn Fn(Option<Theme>)>;
