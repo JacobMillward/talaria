@@ -1,5 +1,6 @@
 use dioxus::prelude::*;
-use crate::settings::Theme;
+
+use crate::settings::models::Theme;
 
 
 #[component]

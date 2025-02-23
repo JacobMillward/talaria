@@ -628,6 +628,138 @@
       }
     }
   }
+  .tab {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+    appearance: none;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    webkit-user-select: none;
+    user-select: none;
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-base-content);
+      }
+    }
+    --tab-p: 1rem;
+    --tab-bg: var(--color-base-100);
+    --tab-border-color: var(--color-base-300);
+    --tab-radius-ss: 0;
+    --tab-radius-se: 0;
+    --tab-radius-es: 0;
+    --tab-radius-ee: 0;
+    --tab-order: 0;
+    --tab-radius-min: calc(0.75rem - var(--border));
+    border-color: #0000;
+    order: var(--tab-order);
+    height: calc(var(--size-field, 0.25rem) * 10);
+    font-size: 0.875rem;
+    padding-inline-start: var(--tab-p);
+    padding-inline-end: var(--tab-p);
+    &:is(input[type="radio"]) {
+      min-width: fit-content;
+      &:after {
+        content: attr(aria-label);
+      }
+    }
+    &:checked, &:is(.tab-active, [aria-selected="true"]) {
+      & + .tab-content {
+        display: block;
+        height: 100%;
+      }
+    }
+    &:not(:checked, :hover, .tab-active, [aria-selected="true"]) {
+      color: color-mix(in oklab, var(--color-base-content) 50%, transparent);
+    }
+    &:not(input):empty {
+      flex-grow: 1;
+      cursor: default;
+    }
+    &:focus {
+      outline-style: none;
+      @media (forced-colors: active) {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+      }
+    }
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: -5px;
+    }
+    &[disabled] {
+      pointer-events: none;
+      opacity: 40%;
+    }
+  }
+  .tab\! {
+    position: relative !important;
+    display: inline-flex !important;
+    cursor: pointer !important;
+    appearance: none !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    webkit-user-select: none !important;
+    user-select: none !important;
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-base-content) !important;
+      }
+    }
+    --tab-p: 1rem;
+    --tab-bg: var(--color-base-100);
+    --tab-border-color: var(--color-base-300);
+    --tab-radius-ss: 0;
+    --tab-radius-se: 0;
+    --tab-radius-es: 0;
+    --tab-radius-ee: 0;
+    --tab-order: 0;
+    --tab-radius-min: calc(0.75rem - var(--border));
+    border-color: #0000 !important;
+    order: var(--tab-order) !important;
+    height: calc(var(--size-field, 0.25rem) * 10) !important;
+    font-size: 0.875rem !important;
+    padding-inline-start: var(--tab-p) !important;
+    padding-inline-end: var(--tab-p) !important;
+    &:is(input[type="radio"]) {
+      min-width: fit-content !important;
+      &:after {
+        content: attr(aria-label) !important;
+      }
+    }
+    &:checked, &:is(.tab-active, [aria-selected="true"]) {
+      & + .tab-content {
+        display: block !important;
+        height: 100% !important;
+      }
+    }
+    &:not(:checked, :hover, .tab-active, [aria-selected="true"]) {
+      color: color-mix(in oklab, var(--color-base-content) 50%, transparent) !important;
+    }
+    &:not(input):empty {
+      flex-grow: 1 !important;
+      cursor: default !important;
+    }
+    &:focus {
+      outline-style: none !important;
+      @media (forced-colors: active) {
+        outline: 2px solid transparent !important;
+        outline-offset: 2px !important;
+      }
+    }
+    &:focus-visible {
+      outline: 2px solid currentColor !important;
+      outline-offset: -5px !important;
+    }
+    &[disabled] {
+      pointer-events: none !important;
+      opacity: 40% !important;
+    }
+  }
   .btn {
     display: inline-flex;
     flex-shrink: 0;
@@ -1768,6 +1900,26 @@
   .z-1 {
     z-index: 1;
   }
+  .z-3 {
+    z-index: 3;
+  }
+  .tab-content {
+    order: var(--tabcontent-order);
+    display: none;
+    border-color: transparent;
+    --tabcontent-radius-ss: 0;
+    --tabcontent-radius-se: 0;
+    --tabcontent-radius-es: 0;
+    --tabcontent-radius-ee: 0;
+    --tabcontent-order: 1;
+    width: 100%;
+    margin: var(--tabcontent-margin);
+    border-width: var(--border);
+    border-start-start-radius: var(--tabcontent-radius-ss);
+    border-start-end-radius: var(--tabcontent-radius-se);
+    border-end-start-radius: var(--tabcontent-radius-es);
+    border-end-end-radius: var(--tabcontent-radius-ee);
+  }
   .hero {
     display: grid;
     width: 100%;
@@ -1811,6 +1963,9 @@
   }
   .m-7 {
     margin: calc(var(--spacing) * 7);
+  }
+  .m-8 {
+    margin: calc(var(--spacing) * 8);
   }
   .m-9 {
     margin: calc(var(--spacing) * 9);
@@ -2094,6 +2249,9 @@
   .block {
     display: block;
   }
+  .contents {
+    display: contents;
+  }
   .flex {
     display: flex;
   }
@@ -2142,6 +2300,9 @@
   .h-screen {
     height: 100vh;
   }
+  .w-2 {
+    width: calc(var(--spacing) * 2);
+  }
   .w-5 {
     width: calc(var(--spacing) * 5);
   }
@@ -2159,6 +2320,9 @@
   }
   .shrink {
     flex-shrink: 1;
+  }
+  .flex-grow {
+    flex-grow: 1;
   }
   .border-collapse {
     border-collapse: collapse;
@@ -2342,6 +2506,10 @@
       }
     }
   }
+  .blur {
+    --tw-blur: blur(8px);
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
@@ -2366,35 +2534,26 @@
     -webkit-user-select: none;
     user-select: none;
   }
-  .\[h\:\>RM\#�\e 8X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\\e 8X\12 �А�\!��-��w�\] {
-    h: >RM#�8X�А�!���4]lX���Ǘ�K������\8X�А�!��-��w�;
+  .\[a\:E�b�\12 �\!x�H��\e �i\3 \~_d���rB\15 \6 ������\17 \] {
+    a: E�b��!x�H���i~ d���rB������;
   }
-  .\[h\:\>RM\#�6\5 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\6\5 X\12 �А�\!��-��w�\] {
-    h: >RM#�6X�А�!���4]lX���Ǘ�K������\6X�А�!��-��w�;
+  .\[h\:\>RM\#�\8 \7 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\\8 \7 X\12 �А�\!��-��w�\] {
+    h: >RM#�X�А�!���4]lX���Ǘ�K������\X�А�!��-��w�;
   }
-  .\[h\:\>RM\#�\;8X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\\;8X\12 �А�\!��-��w�\] {
-    h: >RM#�;8X�А�!���4]lX���Ǘ�K������\;8X�А�!��-��w�;
+  .\[h\:\>RM\#�\10 \7 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\\10 \7 X\12 �А�\!��-��w�\] {
+    h: >RM#�X�А�!���4]lX���Ǘ�K������\X�А�!��-��w�;
   }
-  .\[h\:\>RM\#�H8X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\H8X\12 �А�\!��-��w�\] {
-    h: >RM#�H8X�А�!���4]lX���Ǘ�K������\H8X�А�!��-��w�;
+  .\[h\:\>RM\#�\17 \7 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\\17 \7 X\12 �А�\!��-��w�\] {
+    h: >RM#�X�А�!���4]lX���Ǘ�K������\X�А�!��-��w�;
   }
-  .\[h\:\>RM\#�U\5 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\U\5 X\12 �А�\!��-��w�\] {
-    h: >RM#�UX�А�!���4]lX���Ǘ�K������\UX�А�!��-��w�;
+  .\[h\:\>RM\#�\19 \7 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\\19 \7 X\12 �А�\!��-��w�\] {
+    h: >RM#�X�А�!���4]lX���Ǘ�K������\X�А�!��-��w�;
   }
-  .\[h\:\>RM\#�h\5 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\h\5 X\12 �А�\!��-��w�\] {
-    h: >RM#�hX�А�!���4]lX���Ǘ�K������\hX�А�!��-��w�;
+  .\[h\:\>RM\#�\1a \7 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\\1a \7 X\12 �А�\!��-��w�\] {
+    h: >RM#�X�А�!���4]lX���Ǘ�K������\X�А�!��-��w�;
   }
-  .\[h\:\>RM\#�i\5 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\i\5 X\12 �А�\!��-��w�\] {
-    h: >RM#�iX�А�!���4]lX���Ǘ�K������\iX�А�!��-��w�;
-  }
-  .\[h\:\>RM\#��\5 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\�\5 X\12 �А�\!��-��w�\] {
-    h: >RM#��X�А�!���4]lX���Ǘ�K������\�X�А�!��-��w�;
-  }
-  .\[h\:\>RM\#��7X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\�7X\12 �А�\!��-��w�\] {
-    h: >RM#��7X�А�!���4]lX���Ǘ�K������\�7X�А�!��-��w�;
-  }
-  .\[h\:\>RM\#��8X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\�8X\12 �А�\!��-��w�\] {
-    h: >RM#��8X�А�!���4]lX���Ǘ�K������\�8X�А�!��-��w�;
+  .\[h\:\>RM\#��\6 X\12 �А�\!���4\]lX\16 ���Ǘ�K���\5 ���\15 \\�\6 X\12 �А�\!��-��w�\] {
+    h: >RM#��X�А�!���4]lX���Ǘ�K������\�X�А�!��-��w�;
   }
   .radio-primary {
     --input-color: var(--color-primary);

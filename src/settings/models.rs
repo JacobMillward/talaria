@@ -13,6 +13,27 @@ impl Theme {
     }
 }
 
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub struct Settings {
     pub theme: Option<Theme>,
+}
+
+impl Default for Settings {
+    fn default() -> Self {
+        Self {
+            theme: None,
+        }
+    }
+}
+
+impl Settings {
+    pub fn update(&mut self, update: SettingsUpdate) {
+        match update {
+            SettingsUpdate::Theme(theme) => self.theme = theme,
+        }
+    }
+}
+
+pub enum SettingsUpdate {
+    Theme(Option<Theme>),
 }

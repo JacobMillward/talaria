@@ -1,5 +1,4 @@
 use dioxus::prelude::*;
-use crate::settings::open_settings;
 
 #[component]
 pub fn NavBar() -> Element {

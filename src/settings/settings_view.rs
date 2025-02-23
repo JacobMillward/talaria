@@ -1,20 +1,27 @@
 use std::rc::Rc;
 
 use dioxus::prelude::*;
-use super::settings::Theme;
-use crate::{components::ThemeChanger, FAVICON, TAILWIND_CSS};
+use crate::{components::ThemeChanger, hooks::use_extracted_state, settings::models::SettingsUpdate, FAVICON, TAILWIND_CSS};
 
-use super::theme_picker::ThemePicker;
+use super::{models::Settings, theme_picker::ThemePicker};
 
+pub type SettingsUpdateCallback = Rc<dyn Fn(SettingsUpdate)>;
 
-pub fn settings_view(theme_callback: Rc<dyn Fn(Option<Theme>)>) -> Element {
-    let mut current_theme = use_signal(|| None::<Theme>);
+#[derive(Clone)]
+pub struct SettingsViewProps {
+    pub initial_settings: Settings,
+    pub settings_callback: SettingsUpdateCallback,
+}
+
+pub fn settings_view(props: SettingsViewProps) -> Element {
+    let mut settings = use_signal(|| props.initial_settings.clone());
+    let current_theme = use_extracted_state(settings, |s| s.theme);
 
     rsx! {
         // Global app resources
         document::Link { rel: "icon", href: FAVICON }
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
-
+        
         ThemeChanger { theme: current_theme }
         
         main { class: "p-4",
@@ -22,10 +29,10 @@ pub fn settings_view(theme_callback: Rc<dyn Fn(Option<Theme>)>) -> Element {
 
             div { class: "mt-2 p-2",
                 ThemePicker { 
-                    current_theme: current_theme.read().clone(),
+                    current_theme: current_theme(),
                     change_theme: move |new_theme| {
-                        current_theme.set(new_theme);
-                        theme_callback(new_theme);
+                        settings.write().theme = new_theme;
+                        (props.settings_callback)(SettingsUpdate::Theme(new_theme));
                     }
                 }
             }

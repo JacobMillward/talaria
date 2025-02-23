@@ -1,6 +1,6 @@
 use dioxus::prelude::*;
 
-use super::super::settings::Theme;
+use super::models::Theme;
 
 #[derive(Props, PartialEq, Clone)]
 pub struct ThemePickerProps {
