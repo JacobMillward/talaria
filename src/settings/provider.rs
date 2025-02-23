@@ -6,6 +6,15 @@ use crate::settings::{
 };
 use super::window::open_settings;
 
+#[derive(Clone)]
+pub struct SettingsOpener(Rc<dyn Fn() + 'static>);
+
+impl SettingsOpener {
+    pub fn open(&self) {
+        (self.0)();
+    }
+}
+
 #[component]
 pub fn SettingsProvider(children: Element) -> Element {
     let mut settings_state = use_context_provider(|| Signal::new(Settings::default()));
@@ -25,6 +34,8 @@ pub fn SettingsProvider(children: Element) -> Element {
         }));
     };
 
+    _ = use_context_provider(|| SettingsOpener(Rc::new(open_settings_handler)));
+
     _ = use_global_shortcut(compose_global_shortcut(SETTINGS_KEY).as_str(), move || open_settings_handler());
     
     rsx!{ {children} }
@@ -32,4 +43,8 @@ pub fn SettingsProvider(children: Element) -> Element {
 
 pub fn use_settings() -> Signal<Settings> {
     use_context::<Signal<Settings>>()
+}
+
+pub fn use_settings_opener() -> SettingsOpener {
+    use_context::<SettingsOpener>()
 }

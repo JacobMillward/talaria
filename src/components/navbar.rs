@@ -1,7 +1,11 @@
 use dioxus::prelude::*;
 
+use crate::settings::use_settings_opener;
+
 #[component]
 pub fn NavBar() -> Element {
+    let settings_opener = use_settings_opener();
+
     rsx! {
         div { class: "navbar bg-base-100 shadow-sm",
             div { class: "navbar-start",
@@ -60,6 +64,7 @@ pub fn NavBar() -> Element {
             div { class: "navbar-end",
                 button {
                     class: "btn",
+                    onclick: move |_| { settings_opener.open() },
                     "Settings"
                 }
             }
